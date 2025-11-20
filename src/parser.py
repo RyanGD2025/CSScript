@@ -110,3 +110,27 @@ def p_empty(p):
 
 # Constrói o parser
 parser = yacc.yacc()
+
+# Exemplo de teste (Adicione no final de parser.py)
+if __name__ == '__main__':
+    codigo_teste = """
+    local vida = 100;
+    local nome = "Player1";
+    
+    objeto.Pos.x = 5 + 3 * 2; // Atribuicao complexa
+    
+    if true {
+        printinConsole("Iniciando...");
+    }
+    """
+    
+    # É necessário que o PLY gere o arquivo 'parsetab.py'
+    try:
+        resultado_ast = parser.parse(codigo_teste, lexer=lexer)
+        print("--- AST Gerada com Sucesso! ---")
+        # Você precisaria de um método para imprimir a AST de forma bonita
+        # Por enquanto, apenas confirmamos que não houve erro de sintaxe.
+        print(type(resultado_ast))
+    except Exception as e:
+        print(f"Falha ao Analisar: {e}")
+        
